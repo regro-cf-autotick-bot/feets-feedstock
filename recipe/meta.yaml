@@ -11,12 +11,12 @@ source:
 
 build:
   noarch: python
-  number: 0
+  number: 1
   script: "{{ PYTHON }} -m pip install . -vv "
 
 requirements:
   host:
-    - python
+    - python {{ python_min }}
     - pip
   run:
     - astropy
@@ -25,13 +25,15 @@ requirements:
     - numpy
     - pandas
     - pytest
-    - python
+    - python >={{ python_min }}
     - requests
     - scipy
     - six
     - statsmodels
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - feets
     - feets.datasets
